@@ -1,0 +1,23 @@
+html
+  head
+    title=title
+    link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
+  body
+    div.container
+      div.jumbotron
+        h3 112
+ 
+        if user
+          p Welcome, #{user.fullName}
+          p
+            a.small(href="profile") Edit my profile
+          form(action='/logout', method='POST')
+            button.btn.btn-default(type="submit") Logout
+        else
+          p Интерфейс для загрузки данных на платформу
+          p
+            a.btn.btn-primary(href="/login") Войти
+          p
+            span.small Нет прав? 
+            span &nbsp;
+            a.small(href="/register") Пишите сюда
