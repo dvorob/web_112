@@ -1,23 +1,30 @@
-html
+п»їhtml
   head
     title=title
+    meta(charset='UTF-8')
     link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
   body
     div.container
       div.jumbotron
-        h3 112
+        h1 112
  
         if user
           p Welcome, #{user.fullName}
           p
             a.small(href="profile") Edit my profile
-          form(action='/logout', method='POST')
+            form(action='/logout', method='POST')
             button.btn.btn-default(type="submit") Logout
         else
-          p Интерфейс для загрузки данных на платформу
+          p РРЅС‚РµСЂС„РµР№СЃ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… РЅР° РїР»Р°С‚С„РѕСЂРјСѓ
           p
-            a.btn.btn-primary(href="/login") Войти
+            form(action='/login', method='POST')
+            input.form-control.form-control-inline(name='user_name', type='text', size='20', placeholder='Р›РѕРіРёРЅ')
+            input.form-control.form-control-inline(name='user_pass', type='password', placeholder='РџР°СЂРѕР»СЊ')
+            button.btn.btn-primary(type="submit") Р’РѕР№С‚Рё
+          br
+          br
           p
-            span.small Нет прав? 
+            span.small РќРµС‚ РїСЂР°РІ? 
             span &nbsp;
-            a.small(href="/register") Пишите сюда
+            a.small(href="/register") РџРёС€РёС‚Рµ СЃСЋРґР°
