@@ -1,10 +1,6 @@
-﻿html
-  head
-    title=title
-    meta(charset='UTF-8')
-    link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
-    link(href='/stylesheets/style.css', rel='stylesheet')
-  body
+﻿extends layout
+
+block content
     div.container
       div.jumbotron
         h1 112
@@ -19,9 +15,9 @@
           p Интерфейс загрузки данных на платформу
           p
             form(action='/login', method='POST')
-            input.form-control.form-control-inline(name='user_name', type='text', size='20', placeholder='Логин')
-            input.form-control.form-control-inline(name='user_pass', type='password', placeholder='Пароль')
-            button.btn.btn-primary(type="submit") Войти
+              input.form-control.form-control-inline(name='user_name', type='text', size='20', placeholder='Логин')
+              input.form-control.form-control-inline(name='user_pass', type='password', placeholder='Пароль')
+              button.btn.btn-primary(type="submit") Войти
           br
           br
           p

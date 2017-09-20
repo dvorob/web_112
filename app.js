@@ -10,6 +10,64 @@ var users = require('./routes/users');
 
 var app = express();
 
+// LDAPLDAPLDAPLDAPLDAPLDAPLDAP
+var ldap = require('ldapjs');
+var username = 'dmitry.vorobyev'; //req.body.username;
+var password = 'Inferno88'; //req.body.password;
+var ldapres = null;
+var client = ldap.createClient({
+	url: 'ldap://10.99.89.2:389'
+});
+var dn = null;
+
+var opts = {
+  searchFilter: '(mail=dmitry.vorobyev)',
+  scope: 'sub',
+};
+
+ // To find user's Domain Components & Domain Names
+/* 	client.search('DC=Megafon,DC=ru', opts, function(err, res) {
+
+	  res.on('searchEntry', function(entry) {
+		console.log('searchEntry ' + JSON.stringify(entry.object.dn));
+		//dn = entry.object.dn;
+	  });
+	  res.on('searchReference', function(referral) {
+		console.log('referral: ' + referral.uris.join());
+	  });
+	  res.on('error', function(err) {
+		console.error('error: ' + err.message);
+	  });
+	  res.on('end', function(result) {
+		console.log('status: ' + result.status);
+	  });
+	}); */
+ //
+
+/* var client = ldap.createClient({
+	url: 'ldap://10.99.89.2:389',
+	bindDN: 'CN=msk-ldapreq,OU=Service Accounts,OU=MSK,DC=Megafon,DC=ru',
+	bindCredentials: 'Sonic2013',
+	searchBase: 'DC=Megafon,DC=ru',
+	searchFilter: '(username=dmitry.vorobyev)'
+});
+  
+client.search('DC=Megafon,DC=ru', opts, function (err, result) {
+  console.log('1');
+  result.on('searchEntry', function (entry) {
+    ldapres = entry.raw
+  })
+
+  result.on('end', function (result) {
+    if (!ldapres) { console.log('2'); }
+
+	console.log(ldapres);
+
+  })
+}) */
+ 
+// LDAPLDAPLDAPLDAPLDAPLDAPLDAP
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -29,14 +87,28 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
  
 app.get('/', function (req, res) {
+console.log(req.body.user_name);
   res.render('auth', {
 	title: '112'
   });
+  
 });
 
-app.get('/login', function (req, res) {
-
+app.post('/login', function (req, res) {
+ // Check user's credential
+	client.bind(req.body.user_name, req.body.user_pass, function(err) {
+	  if (err) {
+		console.log('error: ' + err);
+	  }
+	  else {
+		console.log('successful');
+		res.render('main');
+	  }
+	});
+ //
+  
 });
+
 
 app.use('/', index);
 app.use('/users', users);
