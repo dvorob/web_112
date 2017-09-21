@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var parse = require('./middlewares/parse');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -102,13 +102,15 @@ app.post('/login', function (req, res) {
 	  }
 	  else {
 		console.log('successful');
-		res.render('main');
+		res.redirect('/main');
 	  }
 	});
  //
-  
 });
 
+app.get('/main', function (req, res) {
+	res.render('main');
+});
 
 app.use('/', index);
 app.use('/users', users);
