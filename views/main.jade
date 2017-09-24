@@ -1,15 +1,12 @@
 ﻿extends layout
 
-
 block content
-  //- script(src='/javascripts/main.js', type='text/javascript')
+  script(src='/js/main.js', type='text/javascript')
   h1= 'Загрузить данные'
   br
   br
   form(action='/parse', method='POST')
-  div.form-group
-    label.fileInput
-    input.form-control-file(name='file_path', type='file', placeholder='Выберите файл')
-    button.btn.btn-primary(type="submit") Ок      
-
-	
+    div.form-group
+      label.fileInput
+      input.form-control-file(name='file_path', type='file', placeholder='Выберите файл')
+      button.btn.btn-primary(type="submit") Ок

@@ -25,6 +25,8 @@ var opts = {
   scope: 'sub',
 };
 
+app.set('view options', { locals: { scripts: ['main.js'] } });
+
  // To find user's Domain Components & Domain Names
 /* 	client.search('DC=Megafon,DC=ru', opts, function(err, res) {
 
@@ -51,7 +53,7 @@ var opts = {
 	searchBase: 'DC=Megafon,DC=ru',
 	searchFilter: '(username=dmitry.vorobyev)'
 });
-  
+
 client.search('DC=Megafon,DC=ru', opts, function (err, result) {
   console.log('1');
   result.on('searchEntry', function (entry) {
@@ -65,7 +67,7 @@ client.search('DC=Megafon,DC=ru', opts, function (err, result) {
 
   })
 }) */
- 
+
 // LDAPLDAPLDAPLDAPLDAPLDAPLDAP
 
 // view engine setup
@@ -85,13 +87,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
- 
+
 app.get('/', function (req, res) {
 console.log(req.body.user_name);
   res.render('auth', {
 	title: '112'
   });
-  
+
 });
 
 app.post('/login', function (req, res) {
@@ -106,6 +108,11 @@ app.post('/login', function (req, res) {
 	  }
 	});
  //
+});
+
+app.post('/parse', function (req, res) {
+	console.log(req);
+	console.log(res);
 });
 
 app.get('/main', function (req, res) {
@@ -133,9 +140,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
- 
+
 app.listen(3000, function () {
-  
+
 });
 
 
