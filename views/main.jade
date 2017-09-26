@@ -7,10 +7,11 @@ block content
   h1= 'Загрузить данные'
   br
   br
-  div#htmlout
+  input#xlf.btn.btn-primary(name="xlfile", type="file", placeholder='File')
   form(action='/parse', method='POST')
     div.form-group
       label.fileInput
-      input.form-control-file(name='file_path', type='file', placeholder='Выберите файл')
       button.btn.btn-primary(type="submit") Ок
-  button#to_parse.btn.btn-primary(type="button") test
+
+  pre#out
+  div#htmlout
