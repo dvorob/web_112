@@ -7,11 +7,17 @@ block content
   h1= 'Загрузить данные'
   br
   br
-  input#xlf.btn.btn-primary(name="xlfile", type="file", placeholder='File')
+
+  h4
+    label.btn.btn-default.btn-file Выбрать файл
+      input#xlf(name="xlfile", type="file", style="display: none", onchange="display_filename()")
+    span#filename.label.label-info(style="padding-left:30px;background-color:#fff;color:#aaa")
+  br
+  br
   form(action='/parse', method='POST')
     div.form-group
       label.fileInput
-      button.btn.btn-primary(type="submit") Ок
+      button#send_file_button.btn.btn-primary.disabled(type="submit") Отправить
 
   pre#out
   div#htmlout

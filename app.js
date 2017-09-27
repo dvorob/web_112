@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var http = require('http');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -9,6 +10,9 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+app.server = http.createServer(app);
+app.server.listen(3000);
 
 // LDAPLDAPLDAPLDAPLDAPLDAPLDAP
 var ldap = require('ldapjs');
@@ -139,13 +143,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
-app.listen(3000, function () {
-
-});
-
-
-
 
 module.exports = app;

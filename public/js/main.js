@@ -1,3 +1,5 @@
+var global_wb;
+
 function process_page () {
 
 	/*jshint browser:true */
@@ -12,8 +14,6 @@ function process_page () {
 		/* worker scripts */
 		worker: './xlsxworker.js'
 	};
-
-	var global_wb;
 
 	var process_wb = (function() {
 		var OUT = document.getElementById('out');
@@ -39,6 +39,7 @@ function process_page () {
 			var result = [];
 			workbook.SheetNames.forEach(function(sheetName) {
 				var csv = X.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+				console.log(csv);
 				if(csv.length){
 					result.push("SHEET: " + sheetName);
 					result.push("");
@@ -72,7 +73,7 @@ function process_page () {
 
 		return function process_wb(wb) {
 			global_wb = wb;
-			var output = to_json(wb);
+			var output = to_csv(wb);
 			// switch(get_format()) {
 			// 	case "form": output = to_fmla(wb); break;
 			// 	case "html": output = to_html(wb); break;
@@ -153,3 +154,10 @@ function process_page () {
 
 };
 window.onload = process_page;
+
+function file_choosen() {
+		document.getElementById('filename').innerHTML = document.getElementById('xlf').value.replace(/.*\\/, '');
+		if (global_wb.length > 0) {
+			document.getElementById('send_file_button').classList.remove('disabled');
+		}
+}
